@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Player.h"
 
-
 int main()
 {
 	std::cout << "\t\t\t\t\t\tWelcome to Crazy Eights !\n\n"
@@ -32,8 +31,11 @@ int main()
 
 	while (true)
 	{
-		player1.playRound(pile, deck);
+		if (player1.playRound(pile, deck))
+			return 0;
 
-		CPU.playRound(pile, deck);
+		else if (CPU.playRound(pile, deck))
+			return 0;
+
 	}
 }

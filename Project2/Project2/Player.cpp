@@ -8,13 +8,26 @@ void Player::setName()
 
 const std::string& Player::getName() const { return m_name; }
 
+bool Player::hasWon() const
+{
+	if (m_hand.empty())
+	{
+		std::cout << this->getName() << " has no card left!\n"
+				  << this->getName() << " won!\n\n";
+
+		return true;
+	}
+
+	return false;
+}
+
 void Player::displayHand() const
 {
-	std::cout << "Your hand :\n\n";
+	std::cout << "\t\tDeck:\n\n";
 
-	for (const auto& e : m_hand)
+	for (size_t i{ 0 }; i < m_hand.size(); i++)
 	{
-		std::cout << e << "\n";
+		std::cout << "\t#" << i << " " << m_hand[i] << "\n";
 	}
 	std::cout << "\n\n";
 }
@@ -24,7 +37,7 @@ void Player::addToHand(const Card& card)
 	m_hand.emplace_back(card);
 }
 
-void Player::playRound(PlayPile& pile, Deck& deck)
+bool Player::playRound(PlayPile& pile, Deck& deck)
 {
 	const Card& topCard{ pile.getTopCard() };
 
@@ -53,22 +66,16 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 		if (!newCard.isCardMatching(topCard))
 		{
 			std::cout << "... but you cannot play this card !\n\n";
-			return;
+			return false;
 		}
 	}
 
-	std::cout << "\t\tDeck:\n\n";
-
-	for (size_t i{ 0 }; i < m_hand.size(); i++)
-	{
-		std::cout << "\t#" << i << " " << m_hand[i] << "\n";
-	}
-	std::cout << "\n\n";
+	this->displayHand();
 
 	while (true)
 	{
 
-		std::cout << "Choose the card's number you want to play : ";
+		std::cout << "Choose the card's number you want to play: ";
 		int choice{};
 		std::cin >> choice;
 
@@ -94,10 +101,11 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 			continue;
 		}
 
-		std::cout << "You played " << selectedCard << " !\n";
+		std::cout << m_name << " played " << selectedCard << " !\n";
 		std::cout << selectedCard << " is now on top of the pile.\n\n";
 		pile.putCard(selectedCard); // Putting valid selected card on top of the pile
 		m_hand.erase(m_hand.begin() + choice); // Delete selected card from m_hand
-		break;
+
+		return this->hasWon();
 	}
 }

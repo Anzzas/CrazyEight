@@ -18,7 +18,8 @@ public:
 	const std::string& getName() const;
 	void displayHand() const;
 	void addToHand(const Card& card);
-	void playRound(PlayPile& pile, Deck& deck);
+	bool playRound(PlayPile& pile, Deck& deck);
+	bool hasWon() const;
 
 private:
 
