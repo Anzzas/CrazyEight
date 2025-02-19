@@ -39,6 +39,7 @@ void Player::addToHand(const Card& card)
 
 bool Player::playRound(PlayPile& pile, Deck& deck)
 {
+
 	const Card& topCard{ pile.getTopCard() };
 
 	std::cout << "It is your turn " << m_name << ".\n";
@@ -56,6 +57,10 @@ bool Player::playRound(PlayPile& pile, Deck& deck)
 
 	if (!matchingCard)
 	{
+		if (deck.getDeck().empty())
+		{
+
+		}
 		std::cout << "You do not have any matching card !\n";
 		std::cout << "Picking up a new card ...\n";
 		const Card newCard{ deck.TakeCard() };

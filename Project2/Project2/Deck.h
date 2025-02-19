@@ -4,6 +4,7 @@
 #include "Random.h"
 #include "Card.h"
 #include <algorithm>
+#include "PlayPile.h"
 
 class Deck
 {
@@ -23,6 +24,8 @@ public:
 
 	void shuffleDeck();
 	const Card TakeCard();
+	const std::vector<Card>& getDeck() const;
+	void resetDeck(PlayPile& pile);
 
 private:
 

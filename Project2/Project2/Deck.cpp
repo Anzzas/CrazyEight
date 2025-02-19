@@ -12,3 +12,16 @@ const Card Deck::TakeCard() // take the top card from the deck's pile
 
 	return temp;
 }
+
+const std::vector<Card>& Deck::getDeck() const
+{
+	return m_deck;
+}
+
+void Deck::resetDeck(PlayPile& pile)
+{
+	for (const auto& e : pile.) //
+	{
+
+	}
+}
