@@ -5,9 +5,9 @@ void Deck::shuffle()
 	std::shuffle(m_deck.begin(), m_deck.end(), Random::mt); // Shuffle and randomize the deck
 }
 
-const Card Deck::TakeCard() // take the top card from the deck's pile
+Card Deck::TakeCard() // take the top card from the deck's pile
 {
-	Card temp{ m_deck.back() };
+	Card temp{ std::move(m_deck.back()) };
 	m_deck.pop_back();
 
 	return temp;

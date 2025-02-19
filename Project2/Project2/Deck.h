@@ -11,8 +11,9 @@ class Deck
 public:
 
 	Deck()
-		: m_deck{}
 	{
+		m_deck.reserve(52);
+
 		for (int color{ 0 }; color < Card::max_colors; color++)
 		{
 			for (int value{ 0 }; value < Card::max_values; value++)
@@ -23,7 +24,7 @@ public:
 	}
 
 	void shuffle();
-	const Card TakeCard();
+	Card TakeCard();
 	const std::vector<Card>& getDeck() const;
 	void reset();
 

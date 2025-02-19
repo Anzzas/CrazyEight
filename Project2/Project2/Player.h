@@ -7,12 +7,7 @@ class Player
 {
 public:
 
-	Player() = default;
-
-	Player(std::string_view name)
-		: m_name{ name }
-	{
-	}
+	Player() { m_hand.reserve(10); }
 
 	virtual ~Player()
 	{
@@ -26,6 +21,12 @@ public:
 	bool hasWon() const;
 
 protected:
+
+	Player(std::string_view name)
+		: m_name{ name }
+	{
+		m_hand.reserve(10);
+	}
 
 	std::string m_name{};
 	std::vector<Card> m_hand{};
