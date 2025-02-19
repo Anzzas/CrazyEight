@@ -23,6 +23,8 @@ int main()
 
 	while (true)
 	{
-		player1.playRound(pile);
+		player1.playRound(pile, deck);
+
+
 	}
 }

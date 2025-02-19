@@ -47,6 +47,7 @@ public:
 
 	const Value& getValue() const; // returning Card's value
 	const Color& getColor() const; // returning Card's color
+	const bool isCardMatching(const Card& card2) const;
 
 private:
 

@@ -26,12 +26,40 @@ void Player::addToHand(const Card& card)
 	m_hand.emplace_back(card);
 }
 
-void Player::playRound(PlayPile& pile)
+void Player::playRound(PlayPile& pile, Deck& deck)
 {
 	const Card& topCard{ pile.getTopCard() };
 
 	std::cout << "It is your turn " << m_name << ". " << "Choose a card with the same color, value or a 8 !\n";
 	std::cout << "The top pile card is a " << topCard << "\n\n";
+
+	bool matchingCard{};
+	for (const auto& e : m_hand)
+	{
+		if (e.isCardMatching(topCard))
+		{
+			matchingCard = true;
+			break;
+		}
+	}
+
+	if (!matchingCard)
+	{
+		std::cout << "You do not have any matching card !\n";
+		std::cout << "Picking up a new card ...\n";
+		const Card newCard{ deck.TakeCard() };
+		this->addToHand(newCard);
+
+		std::cout << "You got a " << newCard << "\n";
+
+		if (newCard.isCardMatching(topCard))
+		{
+			std::cout << "... but you cannot play this card !\n";
+			return;
+		}
+	}
+
+	std::cout << "\n";
 
 	for (size_t i{ 0 }; i < m_hand.size(); i++)
 	{
@@ -41,7 +69,8 @@ void Player::playRound(PlayPile& pile)
 
 	while (true)
 	{
-		std::cout << "Choose the card's number you want to play: ";
+
+		std::cout << "Choose the card's number you want to play : ";
 		int choice{};
 		std::cin >> choice;
 

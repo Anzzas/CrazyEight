@@ -12,6 +12,15 @@ const Card::Color& Card::getColor() const
 	return m_color;
 }
 
+const bool Card::isCardMatching(const Card& card2) const
+{
+	if ((m_color == card2.getColor()) || (m_value == card2.getValue()) || (m_value == Value::eight))
+	{
+		return true;
+	}
+	return false;
+}
+
 std::ostream& operator<< (std::ostream& out, const Card& card)
 {
 	out << card.getValue() << " of " << card.getColor();

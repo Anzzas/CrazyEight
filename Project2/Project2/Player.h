@@ -18,7 +18,7 @@ public:
 	const std::string& getName() const;
 	void displayHand() const;
 	void addToHand(const Card& card);
-	void playRound(PlayPile& deck);
+	void playRound(PlayPile& pile, Deck& deck);
 
 private:
 
