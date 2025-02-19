@@ -4,6 +4,15 @@
 
 int main()
 {
+	std::cout << "\t\t\t\t\t\tWelcome to Crazy Eights !\n\n"
+		<< "The first to have no card win !\n"
+		<< "The rules are simple: choose a card to draw of the same color or value of the top pile's card !";
+
+	for (int i = 1; i < 10; i++)
+	{
+		std::cout << "\n";
+	}
+
 	Deck deck{};
 	deck.shuffleDeck();
 
@@ -25,6 +34,6 @@ int main()
 	{
 		player1.playRound(pile, deck);
 
-
+		CPU.playRound(pile, deck);
 	}
 }

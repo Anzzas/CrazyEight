@@ -2,10 +2,8 @@
 
 void Player::setName()
 {
-	std::cout << "Enter your Username: ";
+	std::cout << "Player name: ";
 	std::cin >> m_name;
-
-	std::cout << "Your name is " << m_name << ".\n\n";
 }
 
 const std::string& Player::getName() const { return m_name; }
@@ -30,8 +28,8 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 {
 	const Card& topCard{ pile.getTopCard() };
 
-	std::cout << "It is your turn " << m_name << ". " << "Choose a card with the same color, value or a 8 !\n";
-	std::cout << "The top pile card is a " << topCard << "\n\n";
+	std::cout << "It is your turn " << m_name << ".\n";
+	std::cout << "The top pile card is:\t" << topCard << "\n\n";
 
 	bool matchingCard{};
 	for (const auto& e : m_hand)
@@ -52,18 +50,18 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 
 		std::cout << "You got a " << newCard << "\n";
 
-		if (newCard.isCardMatching(topCard))
+		if (!newCard.isCardMatching(topCard))
 		{
-			std::cout << "... but you cannot play this card !\n";
+			std::cout << "... but you cannot play this card !\n\n";
 			return;
 		}
 	}
 
-	std::cout << "\n";
+	std::cout << "\t\tDeck:\n\n";
 
 	for (size_t i{ 0 }; i < m_hand.size(); i++)
 	{
-		std::cout << "#" << i << " " << m_hand[i] << "\n";
+		std::cout << "\t#" << i << " " << m_hand[i] << "\n";
 	}
 	std::cout << "\n\n";
 
@@ -74,7 +72,7 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 		int choice{};
 		std::cin >> choice;
 
-		if (choice < 0 || choice > static_cast<int>(m_hand.size()))
+		if (choice < 0 || choice > static_cast<int>(m_hand.size() - 1))
 		{
 			std::cout << "You entered a wrong number !\n\n";
 			continue;
@@ -89,7 +87,7 @@ void Player::playRound(PlayPile& pile, Deck& deck)
 		
 		const Card& selectedCard{ m_hand[static_cast<size_t>(choice)] };
 
-		if ((selectedCard.getColor() != topCard.getColor()) && (selectedCard.getValue() != topCard.getValue()))
+		if (!selectedCard.isCardMatching(topCard))
 		{
 			std::cout << "The selected Card does not match neither the top card value and color !\n";
 			std::cout << "Please select a matching color or value card.\n\n";
