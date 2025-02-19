@@ -1,6 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (CrazyEights.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Deck.cpp
-  Player.cpp
   main.cpp
-  Generating Code...
-  Project2.vcxproj -> C:\Users\Win10 Pro & Moi\source\repos\CrazyEight\Project2\x64\Debug\Project2.exe
+  Project2.vcxproj -> C:\Users\Andreas\source\repos\CrazyEight\Project2\x64\Debug\Project2.exe

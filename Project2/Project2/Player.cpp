@@ -55,12 +55,14 @@ bool Player::playRound(PlayPile& pile, Deck& deck)
 		}
 	}
 
-	if (!matchingCard)
+	if (!matchingCard) // If no matching card found in the deck
 	{
 		if (deck.getDeck().empty())
 		{
-
+			deck.reset();
+			deck.shuffle();
 		}
+
 		std::cout << "You do not have any matching card !\n";
 		std::cout << "Picking up a new card ...\n";
 		const Card newCard{ deck.TakeCard() };

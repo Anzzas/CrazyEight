@@ -14,14 +14,18 @@ public:
 	{
 	}
 
+	virtual ~Player()
+	{
+	}
+
 	void setName();
 	const std::string& getName() const;
 	void displayHand() const;
 	void addToHand(const Card& card);
-	bool playRound(PlayPile& pile, Deck& deck);
+	virtual bool playRound(PlayPile& pile, Deck& deck);
 	bool hasWon() const;
 
-private:
+protected:
 
 	std::string m_name{};
 	std::vector<Card> m_hand{};

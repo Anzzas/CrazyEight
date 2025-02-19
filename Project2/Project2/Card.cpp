@@ -12,6 +12,14 @@ const Card::Color& Card::getColor() const
 	return m_color;
 }
 
+Card& Card::operator= (const Card& card)
+{
+	this->m_color = card.m_color;
+	this->m_value = card.m_value;
+
+	return *this;
+}
+
 const bool Card::isCardMatching(const Card& card2) const
 {
 	if ((m_color == card2.getColor()) || (m_value == card2.getValue()) || (m_value == Value::eight))

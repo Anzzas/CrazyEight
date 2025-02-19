@@ -22,10 +22,10 @@ public:
 		}
 	}
 
-	void shuffleDeck();
+	void shuffle();
 	const Card TakeCard();
 	const std::vector<Card>& getDeck() const;
-	void resetDeck(PlayPile& pile);
+	void reset();
 
 private:
 

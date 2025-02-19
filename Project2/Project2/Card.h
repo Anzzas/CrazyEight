@@ -44,7 +44,7 @@ public:
 	friend std::ostream& operator<< (std::ostream& out, const Card& card);
 	friend std::ostream& operator<< (std::ostream& out, const Value& value);
 	friend std::ostream& operator<< (std::ostream& out, const Color& value);
-
+	Card& operator= (const Card& card);
 	const Value& getValue() const; // returning Card's value
 	const Color& getColor() const; // returning Card's color
 	const bool isCardMatching(const Card& card2) const;

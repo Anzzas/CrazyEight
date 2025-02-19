@@ -30,6 +30,9 @@
     <ClCompile Include="PlayPile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Random.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayPile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
