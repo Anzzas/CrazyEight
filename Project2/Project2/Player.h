@@ -3,11 +3,16 @@
 #include "Deck.h"
 #include "PlayPile.h"
 
+namespace Settings
+{
+	constexpr int g_handAllocation{ 10 };
+}
+
 class Player
 {
 public:
 
-	Player() { m_hand.reserve(10); }
+	Player() { m_hand.reserve(Settings::g_handAllocation); }
 
 	virtual ~Player()
 	{
@@ -25,7 +30,7 @@ protected:
 	Player(std::string_view name)
 		: m_name{ name }
 	{
-		m_hand.reserve(10);
+		m_hand.reserve(Settings::g_handAllocation);
 	}
 
 	std::string m_name{};

@@ -2,6 +2,11 @@
 #include "CPU.h"
 #include <array>
 
+namespace Settings
+{
+	constexpr int g_PlayerNumber{ 2 };
+}
+
 int main()
 {
 	std::cout << "\t\t\t\t\t\tWelcome to Crazy Eights !\n\n"
@@ -19,26 +24,25 @@ int main()
 	PlayPile pile{};
 	pile.putCard(deck.TakeCard()); // Put first random card on pile
 
-	std::array<Player, 2> players{
+	std::array<std::unique_ptr<Player>, Settings::g_PlayerNumber> players{
 
-		Player{},
-		CPU{},
+		std::make_unique<Player>(),
+		std::make_unique<CPU>(),
 	};
 
-	for (int i = 1; i < 8; i++) // Giving 7 cards to each player
+	for (int i = 0; i < 7; i++) // Giving 7 cards to each player
 	{
-		for (auto& e : players)
+		for (const auto& e : players)
 		{
-			e.addToHand(deck.TakeCard());
+			e->addToHand(deck.TakeCard());
 		}
 	}
 
 	while (true)
 	{
-		for (auto& e : players)
+		for (const auto& e : players)
 		{
-			
-			if (e.playRound(pile, deck))
+			if (e->playRound(pile, deck))
 				return 0;
 
 			std::cout << "\n\n\n\n";
