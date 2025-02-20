@@ -37,6 +37,59 @@ void Player::addToHand(const Card& card)
 	m_hand.emplace_back(card);
 }
 
+void Player::inputChoice(PlayPile& pile)
+{
+	while (true)
+	{
+
+		std::cout << "Choose the card's number you want to play: ";
+		int choice{};
+		std::cin >> choice;
+
+		if (choice < 0 || choice > static_cast<int>(m_hand.size() - 1))
+		{
+			std::cout << "You entered a wrong number !\n\n";
+			continue;
+		}
+		else if (!std::cin)
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "You did not enter a number ! Try again.\n\n";
+			continue;
+		}
+
+		const Card& selectedCard{ m_hand[static_cast<size_t>(choice)] };
+
+		if (!selectedCard.isCardMatching(pile.getTopCard()))
+		{
+			std::cout << "The selected Card does not match neither the top card value and color !\n";
+			std::cout << "Please select a matching color or value card.\n\n";
+			continue;
+		}
+
+		std::cout << m_name << " played " << selectedCard << " !\n";
+		std::cout << selectedCard << " is now on top of the pile.\n\n";
+		pile.putCard(selectedCard); // Putting valid selected card on top of the pile
+		m_hand.erase(m_hand.begin() + choice); // Delete selected card from m_hand
+
+		return;
+	}
+}
+
+const bool Player::doesHaveMatchingCards(const Card& topCard) const
+{
+	for (const auto& e : m_hand)
+	{
+		if (e.isCardMatching(topCard))
+		{
+			return true;
+			break;
+		}
+	}
+	return false;
+}
+
 bool Player::playRound(PlayPile& pile, Deck& deck)
 {
 
@@ -45,17 +98,7 @@ bool Player::playRound(PlayPile& pile, Deck& deck)
 	std::cout << "It is your turn " << m_name << ".\n";
 	std::cout << "The top pile card is:\t" << topCard << "\n\n";
 
-	bool matchingCard{};
-	for (const auto& e : m_hand)
-	{
-		if (e.isCardMatching(topCard))
-		{
-			matchingCard = true;
-			break;
-		}
-	}
-
-	if (!matchingCard) // If no matching card found in the deck
+	if (!doesHaveMatchingCards(topCard)) // If no matching card found in the deck
 	{
 		if (deck.getDeck().empty())
 		{
@@ -79,40 +122,7 @@ bool Player::playRound(PlayPile& pile, Deck& deck)
 
 	this->displayHand();
 
-	while (true)
-	{
-
-		std::cout << "Choose the card's number you want to play: ";
-		int choice{};
-		std::cin >> choice;
-
-		if (choice < 0 || choice > static_cast<int>(m_hand.size() - 1))
-		{
-			std::cout << "You entered a wrong number !\n\n";
-			continue;
-		}
-		else if (!std::cin)
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "You did not enter a number ! Try again.\n\n";
-			continue;
-		}
-		
-		const Card& selectedCard{ m_hand[static_cast<size_t>(choice)] };
-
-		if (!selectedCard.isCardMatching(topCard))
-		{
-			std::cout << "The selected Card does not match neither the top card value and color !\n";
-			std::cout << "Please select a matching color or value card.\n\n";
-			continue;
-		}
-
-		std::cout << m_name << " played " << selectedCard << " !\n";
-		std::cout << selectedCard << " is now on top of the pile.\n\n";
-		pile.putCard(selectedCard); // Putting valid selected card on top of the pile
-		m_hand.erase(m_hand.begin() + choice); // Delete selected card from m_hand
+		inputChoice(pile);
 
 		return this->hasWon();
-	}
 }

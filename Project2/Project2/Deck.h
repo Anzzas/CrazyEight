@@ -6,13 +6,18 @@
 #include <algorithm>
 #include "PlayPile.h"
 
+namespace Settings
+{
+	constexpr int g_deckAllocation{ 52 };
+}
+
 class Deck
 {
 public:
 
 	Deck()
 	{
-		m_deck.reserve(52);
+		m_deck.reserve(Settings::g_deckAllocation);
 
 		for (int color{ 0 }; color < Card::max_colors; color++)
 		{
