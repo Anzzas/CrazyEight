@@ -24,6 +24,8 @@ public:
 	void addToHand(const Card& card);
 	virtual bool playRound(PlayPile& pile, Deck& deck);
 	bool hasWon() const;
+	void inputChoice();
+	const bool doesHaveMatchingCards(const Card& topCard) const;
 
 protected:
 

@@ -37,6 +37,16 @@ void Player::addToHand(const Card& card)
 	m_hand.emplace_back(card);
 }
 
+void Player::inputChoice()
+{
+
+}
+
+const bool Player::doesHaveMatchingCards(const Card& topCard) const
+{
+
+}
+
 bool Player::playRound(PlayPile& pile, Deck& deck)
 {
 
